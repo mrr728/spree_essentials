@@ -1,5 +1,12 @@
+<% content_for :page_title do %>
+  <%= t(:listing_uploads) %>
+<% end %>
 
-<h1><%= t('.listing_uploads') %></h1>
+<% content_for :page_actions do %>
+  <li id="new_upload_link">
+    <%= button_link_to t("spree.admin.uploads.new.new_upload"), new_object_url, { :icon => "icon-plus"} %>
+  </li>
+<% end %>
 
 <table class="index">
 	<tr>
@@ -7,7 +14,7 @@
 	  <th><%= sort_link @search, :attachment_file_name, t("upload.file_name") %></th>
 	  <th><%= sort_link @search, :description, t("description") %></th>
 	  <th><%= sort_link @search, :attachment_file_size, t("upload.size") %></th>
-	  <th><%= t("action") %></th>
+	  <th></th>
 	</tr>
  
   <% @uploads.each do |upload| %>
@@ -20,8 +27,8 @@
       <td><%= link_to upload.attachment_file_name, upload.attachment.url(:original) %></td>
       <td><%= upload.alt %></td>
       <td><%= upload.attachment_file_size.to_i / 1024 %> kb</td>
-      <td class="actions">
-        <%= link_to_with_icon('edit', t("edit"), edit_admin_upload_url(upload)) %>
+      <td class="actions" data-hook="admin_uploads_index_row_actions">
+        <%= link_to_edit upload, :not_text => true, :class => 'edit' %>
         &nbsp;
         <%= link_to_delete upload, {:url => admin_upload_url(upload) }%>
       </td>
@@ -49,9 +56,7 @@
 
 <div id="images"></div>
 <br/>
-<p>
-  <%= link_to icon('add') + ' ' + t(".new_upload"), new_admin_upload_url, :id => "new_image_link" %>
-</p>
+
 
 <% content_for :head do %>
   <script type="text/javascript">

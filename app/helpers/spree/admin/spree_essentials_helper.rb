@@ -1,6 +1,7 @@
 module Spree::Admin::SpreeEssentialsHelper
   
   def inside_contents_tab?
+    # debugger
     @inside_contents_tab ||= !request.fullpath.scan(Regexp.new(extension_routes.join("|"))).empty?
   end
   

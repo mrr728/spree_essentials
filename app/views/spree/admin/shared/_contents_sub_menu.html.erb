@@ -1,10 +1,12 @@
 <% if inside_contents_tab? %>
   <% content_for :sub_menu do %>
-    <ul id="sub_nav" data-hook="essentials_sub_nav">
+    <ul id="sub_nav" data-hook="essentials_sub_nav" class="inline-menu">
       <% SpreeEssentials.essentials.each_pair do |name, cls| %>
         <%= tab *cls.sub_tab if defined?(cls.sub_tab) %>
       <% end %>
       <%= tab :uploads, :label => t('spree.admin.subnav.uploads') %>
     </ul>
   <% end %>
+  
+  <%= yield :essentials_sub_menu if content_for?(:essentials_sub_menu) %>
 <% end %>

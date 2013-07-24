@@ -35,7 +35,7 @@ en:
                   
       uploads:
         new:
-          new_upload: New Upload
+          new_upload: Upload a File
         edit:
           edit_upload: Edit Upload
           preview: Preview
